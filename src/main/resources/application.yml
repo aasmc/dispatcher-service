@@ -7,3 +7,19 @@ spring:
   cloud:
     function:
       definition: pack|label
+    stream:
+      bindings:
+        packlabel-in-0:
+          # the actual name at the broker that the binder binds to
+          destination: order-accepted
+          # the consumer group interested in the destination
+          group: ${spring.application.name}
+        packlabel-out-0:
+          destination: order-dispatched
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s
