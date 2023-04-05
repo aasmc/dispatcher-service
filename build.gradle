@@ -17,7 +17,9 @@ ext {
 }
 
 dependencies {
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+	implementation 'org.springframework.retry:spring-retry'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
@@ -25,7 +27,7 @@ dependencies {
 		artifact {
 			name = "spring-cloud-stream"
 			extension = "jar"
-			type = "test-jar"
+			type ="test-jar"
 			classifier = "test-binder"
 		}
 	}
@@ -35,6 +37,11 @@ dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+}
+
+bootBuildImage {
+	imageName = "${project.name}"
+	environment = ["BP_JVM_VERSION": "17.*"]
 }
 
 tasks.named('test') {
