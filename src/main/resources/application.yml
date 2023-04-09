@@ -35,3 +35,14 @@ spring:
     username: user
     password: password
     connection-timeout: 5s
+management:
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
