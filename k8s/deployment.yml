@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: dispatcher-service
-          image: ghcr.io/aasmc/dispatcher-service
+          image: dispatcher-service
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:

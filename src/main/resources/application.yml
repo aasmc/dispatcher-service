@@ -9,9 +9,9 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      request-connect-timeout: 10000 # 10s
-      request-read-timeout: 10000 # 10s
-      fail-fast: false # In production set to true
+      request-connect-timeout: 5000 # 5s
+      request-read-timeout: 5000 # 5s
+      fail-fast: false # In production, set to true
       retry:
         max-attempts: 6
         initial-interval: 1000 # 1s
@@ -22,13 +22,10 @@ spring:
     stream:
       bindings:
         packlabel-in-0:
-          # the actual name at the broker that the binder binds to
           destination: order-accepted
-          # the consumer group interested in the destination
           group: ${spring.application.name}
         packlabel-out-0:
           destination: order-dispatched
-
   rabbitmq:
     host: localhost
     port: 5672
@@ -44,16 +41,16 @@ info:
   system: Polar Bookshop
 
 management:
-  endpoint:
-    health:
-      show-components: always
-      show-details: always
-      probes:
-        enabled: true
   endpoints:
     web:
       exposure:
-        include: health, bindings, configprops, env, functions, heapdump, info, loggers, mappings, prometheus
+        include: bindings, configprops, env, functions, health, heapdump, info, loggers, mappings, prometheus
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
   info:
     env:
       enabled: true
